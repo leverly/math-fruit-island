@@ -1,0 +1,6 @@
+# 测试产物
+test/shots/
+test/audit.json
+node_modules/
+.DS_Store
+*.log

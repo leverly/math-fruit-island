@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>SVG 资产检查</title>
+<style>
+  body{margin:0;padding:16px;background:linear-gradient(180deg,#8FE0FF,#0E93B5);font-family:system-ui,sans-serif}
+  h2{color:#fff;font-size:13px;margin:16px 0 6px;text-shadow:0 1px 3px rgba(0,0,0,.3)}
+  .row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+  .box{background:#FFF6E2;border-radius:14px;padding:8px;box-shadow:0 4px 0 rgba(122,43,184,.25)}
+  .art{display:block}
+  .s1{width:72px;height:auto}
+  .s2{width:56px;height:auto}
+  .s3{width:110px;height:auto}
+  .s4{width:80px;height:auto}
+</style>
+</head>
+<body>
+<h2>苹果 / 苹果核</h2>
+<div class="row" id="r1"></div>
+<h2>气球（多色 + 数字）</h2>
+<div class="row" id="r2"></div>
+<h2>运算符</h2>
+<div class="row" id="r3"></div>
+<h2>礼物</h2>
+<div class="row" id="r4"></div>
+<h2>糖果答案</h2>
+<div class="row" id="r5"></div>
+<h2>星星</h2>
+<div class="row" id="r6"></div>
+<h2>小狮子</h2>
+<div class="row" id="r7"></div>
+<script src="../js/art.js"></script>
+<script>
+  var A = MFI.Art;
+  function put(id, html, cls){
+    var d = document.createElement('div'); d.className='box';
+    d.innerHTML = html;
+    var s = d.querySelector('svg');
+    if (s) s.setAttribute('class', 'art ' + (cls||'s1'));
+    document.getElementById(id).appendChild(d);
+  }
+  put('r1', A.apple());
+  put('r1', A.core());
+  ['pink','green','blue','purple','orange','gray'].forEach(function(c){ put('r2', A.balloon('4', c)); });
+  put('r2', A.balloon('12','pink'));
+  put('r2', A.balloon('?','gray'));
+  ['+','−','=','×'].forEach(function(s){ put('r3', A.opChip(s), 's2'); });
+  put('r4', A.gift('green'));
+  put('r4', A.gift('blue'));
+  ['pink','green','blue','purple','orange'].forEach(function(c,i){ put('r5', A.candy(String(i+3), c), 's4'); });
+  put('r6', A.star(true), 's2');
+  put('r6', A.star(false), 's2');
+  put('r7', A.lion(), 's3');
+</script>
+</body>
+</html>

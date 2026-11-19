@@ -1,0 +1,794 @@
+[
+  {
+    "kind": "num5",
+    "layout": "compare2",
+    "level": "lv3",
+    "prompt": "哪个数大？",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "num10",
+    "layout": "compare2",
+    "level": "lv5",
+    "prompt": "哪个数大？",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "num20",
+    "layout": "compare2",
+    "level": "lv6",
+    "prompt": "哪个数大？",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "time",
+    "layout": "plain",
+    "level": "g1",
+    "prompt": "下午 6 时，用 24 时计时法表示是（ ）时",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "measure",
+    "layout": "clue",
+    "level": "g3",
+    "prompt": "数学书厚约 8（ ）",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "div1",
+    "layout": "share",
+    "level": "g11",
+    "prompt": "把 8 平均分成 4 份，每份是多少？",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "calendar",
+    "layout": "plain",
+    "level": "g15",
+    "prompt": "闰年一年有多少天？",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "decimal",
+    "layout": "plain",
+    "level": "g16",
+    "prompt": "0.6 − 0.4 = （ ）",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "classify",
+    "layout": "clue",
+    "level": "a1_3",
+    "prompt": "下面哪个不是动物？",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "angle",
+    "layout": "polygon",
+    "level": "a2_3",
+    "prompt": "这个图形有几个角？",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "remainder",
+    "layout": "share",
+    "level": "b2_6",
+    "prompt": "把 21 个平均分给 5 个小朋友，每人分几个？还剩几个？",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "num10000",
+    "layout": "compare2",
+    "level": "b2_7",
+    "prompt": "4972 和 4730，哪个大？",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "bignum",
+    "layout": "compare2",
+    "level": "c4_1",
+    "prompt": "231,373 和 635,378，哪个大？",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "div2",
+    "layout": "share",
+    "level": "c4_6",
+    "prompt": "把 81 平均分成 33 份，每份是多少？",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "optimize",
+    "layout": "timeline",
+    "level": "c4_8",
+    "prompt": "烧水 8 分钟，期间可以做 3 件各 1 分钟的事。最少需要（ ）分钟",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "decimal2",
+    "layout": "compare2",
+    "level": "d4_4",
+    "prompt": "2.8 和 6.7，哪个大？",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "fracmul",
+    "layout": "plain",
+    "level": "g6_1",
+    "prompt": "§1/6§ × 2 = （ ）",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "numbershape",
+    "layout": "dots",
+    "level": "g6_8",
+    "prompt": "第 7 个三角形数是多少？",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "proportion",
+    "layout": "plain",
+    "level": "h6_4",
+    "prompt": "6 : 5 = 24 : x，x = （ ）",
+    "fig": "none",
+    "figArea": 0,
+    "figCls": "-"
+  },
+  {
+    "kind": "pattern",
+    "layout": "sequence",
+    "level": "a1_7",
+    "prompt": "找到规律，下一个是什么？",
+    "fig": "30x30",
+    "figArea": 900,
+    "figCls": "seq-chip"
+  },
+  {
+    "kind": "frac2",
+    "layout": "fracpair",
+    "level": "f5_4",
+    "prompt": "§3/5§ 和 §6/10§，它们的关系是？",
+    "fig": "118x25",
+    "figArea": 2891,
+    "figCls": "art art-fracbar"
+  },
+  {
+    "kind": "average",
+    "layout": "avg",
+    "level": "d4_8",
+    "prompt": "这组数的平均数是多少？",
+    "fig": "151x34",
+    "figArea": 5134,
+    "figCls": "avg-chips"
+  },
+  {
+    "kind": "fracadd",
+    "layout": "fracbar",
+    "level": "f5_5",
+    "prompt": "§1/4§ + §1/4§ = （ ）",
+    "fig": "160x33",
+    "figArea": 5315,
+    "figCls": "art art-fracbar"
+  },
+  {
+    "kind": "fracdiv",
+    "layout": "fracbar",
+    "level": "g6_3",
+    "prompt": "§1/3§ ÷ 3 = （ ）",
+    "fig": "160x33",
+    "figArea": 5315,
+    "figCls": "art art-fracbar"
+  },
+  {
+    "kind": "times",
+    "layout": "barmodel",
+    "level": "g5",
+    "prompt": "苹果有 5 个，梨的个数是苹果的 3 倍。梨有多少个？",
+    "fig": "372x15",
+    "figArea": 5725.3125,
+    "figCls": "bar-model"
+  },
+  {
+    "kind": "num100",
+    "layout": "placevalue2",
+    "level": "a1_4",
+    "prompt": "9 个十和 8 个一组成的数是（ ）",
+    "fig": "122x53",
+    "figArea": 6416.4375,
+    "figCls": "pv-fig"
+  },
+  {
+    "kind": "carry10",
+    "layout": "make10",
+    "level": "lv8",
+    "prompt": "用凑十法算一算",
+    "fig": "143x46",
+    "figArea": 6599.5625,
+    "figCls": "mt-row"
+  },
+  {
+    "kind": "equation",
+    "layout": "expr",
+    "level": "e5_5",
+    "prompt": "每支笔 4 元，买 x 支共（ ）元",
+    "fig": "110x64",
+    "figArea": 7110.133544921875,
+    "figCls": "expr-card"
+  },
+  {
+    "kind": "count",
+    "layout": "count",
+    "level": "lv1",
+    "prompt": "数一数，有几个？",
+    "fig": "92x92",
+    "figArea": 8464,
+    "figCls": "art art-candy"
+  },
+  {
+    "kind": "law",
+    "layout": "expr",
+    "level": "d4_3",
+    "prompt": "用分配律简便计算",
+    "fig": "132x64",
+    "figArea": 8499.5625,
+    "figCls": "expr-card"
+  },
+  {
+    "kind": "chance",
+    "layout": "balls",
+    "level": "e5_4",
+    "prompt": "口袋里有这些球，摸一次，哪种球更容易摸到？",
+    "fig": "208x42",
+    "figArea": 8736,
+    "figCls": "ball-bag"
+  },
+  {
+    "kind": "percent",
+    "layout": "percentbar",
+    "level": "g6_6",
+    "prompt": "0.75 化成百分数是（ ）",
+    "fig": "320x30",
+    "figArea": 9600,
+    "figCls": "pbar"
+  },
+  {
+    "kind": "mixed",
+    "layout": "expr",
+    "level": "b2_5",
+    "prompt": "按运算顺序算一算",
+    "fig": "164x64",
+    "figArea": 10527.8671875,
+    "figCls": "expr-card"
+  },
+  {
+    "kind": "multable",
+    "layout": "group",
+    "level": "a2_4",
+    "prompt": "2 × 4 = （ ）",
+    "fig": "138x77",
+    "figArea": 10683.6904296875,
+    "figCls": "group-fig"
+  },
+  {
+    "kind": "percent2",
+    "layout": "tag",
+    "level": "h6_2",
+    "prompt": "衣服原价 500 元，现在打 9 折",
+    "fig": "112x96",
+    "figArea": 10684.09521484375,
+    "figCls": "tag-card"
+  },
+  {
+    "kind": "solid3d",
+    "layout": "solid3d",
+    "level": "lv4",
+    "prompt": "它和下面哪个东西形状一样？",
+    "fig": "108x108",
+    "figArea": 11664,
+    "figCls": "s3-box"
+  },
+  {
+    "kind": "decmul",
+    "layout": "vertical",
+    "level": "e5_1",
+    "prompt": "算一算",
+    "fig": "92x130",
+    "figArea": 11954.5078125,
+    "figCls": "vsum decimal"
+  },
+  {
+    "kind": "mul1",
+    "layout": "vertical",
+    "level": "g6",
+    "prompt": "算一算",
+    "fig": "86x142",
+    "figArea": 12177.84375,
+    "figCls": "vsum"
+  },
+  {
+    "kind": "decdiv",
+    "layout": "vertical",
+    "level": "e5_3",
+    "prompt": "算一算",
+    "fig": "109x130",
+    "figArea": 14201.3203125,
+    "figCls": "vsum decimal"
+  },
+  {
+    "kind": "mul2",
+    "layout": "vertical",
+    "level": "g13",
+    "prompt": "算一算",
+    "fig": "106x142",
+    "figArea": 15016.6875,
+    "figCls": "vsum"
+  },
+  {
+    "kind": "add100b",
+    "layout": "vertical",
+    "level": "a2_2",
+    "prompt": "算一算",
+    "fig": "106x142",
+    "figArea": 15016.6875,
+    "figCls": "vsum"
+  },
+  {
+    "kind": "mul3",
+    "layout": "vertical",
+    "level": "c4_4",
+    "prompt": "算一算",
+    "fig": "106x142",
+    "figArea": 15016.6875,
+    "figCls": "vsum"
+  },
+  {
+    "kind": "decimaladd",
+    "layout": "vertical",
+    "level": "d4_6",
+    "prompt": "算一算（注意小数点对齐）",
+    "fig": "118x130",
+    "figArea": 15341.0078125,
+    "figCls": "vsum decimal"
+  },
+  {
+    "kind": "four",
+    "layout": "expr",
+    "level": "d4_1",
+    "prompt": "按运算顺序算一算",
+    "fig": "252x64",
+    "figArea": 16194.2421875,
+    "figCls": "expr-card"
+  },
+  {
+    "kind": "pos",
+    "layout": "pos",
+    "level": "lv2",
+    "prompt": "小花在小房子的什么位置？",
+    "fig": "154x110",
+    "figArea": 16940,
+    "figCls": "pos-scene"
+  },
+  {
+    "kind": "addbig",
+    "layout": "vertical",
+    "level": "g2",
+    "prompt": "算一算",
+    "fig": "126x142",
+    "figArea": 17855.53125,
+    "figCls": "vsum"
+  },
+  {
+    "kind": "subbig",
+    "layout": "vertical",
+    "level": "g4",
+    "prompt": "算一算",
+    "fig": "126x142",
+    "figArea": 17855.53125,
+    "figCls": "vsum"
+  },
+  {
+    "kind": "ratio",
+    "layout": "ratiobar",
+    "level": "g6_4",
+    "prompt": "7 : 6 的比值是（ ）",
+    "fig": "320x64",
+    "figArea": 20480,
+    "figCls": "art art-ratio"
+  },
+  {
+    "kind": "symmetry2",
+    "layout": "axis",
+    "level": "d4_7",
+    "prompt": "长方形有几条对称轴？",
+    "fig": "146x146",
+    "figArea": 21370.78515625,
+    "figCls": "art"
+  },
+  {
+    "kind": "divtable2",
+    "layout": "group",
+    "level": "b2_4",
+    "prompt": "20 ÷ 4 = （ ）",
+    "fig": "226x98",
+    "figArea": 22061.89453125,
+    "figCls": "group-fig"
+  },
+  {
+    "kind": "direction",
+    "layout": "grid",
+    "level": "g10",
+    "prompt": "小明家在学校的北面，医院在学校的南面。小明家在医院的（ ）面",
+    "fig": "180x130",
+    "figArea": 23326.875,
+    "figCls": "art art-dir"
+  },
+  {
+    "kind": "bearing",
+    "layout": "grid",
+    "level": "g6_2",
+    "prompt": "A 在 B 的南偏东 60°方向，那么 B 在 A 的（ ）方向",
+    "fig": "180x130",
+    "figArea": 23326.875,
+    "figCls": "art art-dir"
+  },
+  {
+    "kind": "symmetry",
+    "layout": "quadshape",
+    "level": "b2_3",
+    "prompt": "这个图形有对称轴吗？",
+    "fig": "224x112",
+    "figArea": 24997.08251953125,
+    "figCls": "art art-quad2"
+  },
+  {
+    "kind": "quad",
+    "layout": "quadshape",
+    "level": "c4_5",
+    "prompt": "四个角都是直角的平行四边形是（ ）",
+    "fig": "224x112",
+    "figArea": 24997.08251953125,
+    "figCls": "art art-quad2"
+  },
+  {
+    "kind": "triangle",
+    "layout": "triangle",
+    "level": "d4_5",
+    "prompt": "三角形两个角是 38° 和 36°，第三个角是（ ）",
+    "fig": "224x112",
+    "figArea": 24997.08251953125,
+    "figCls": "art art-triangle2"
+  },
+  {
+    "kind": "shape2",
+    "layout": "shape",
+    "level": "a1_1",
+    "prompt": "这个图形有几条边？",
+    "fig": "163x163",
+    "figArea": 26696.496337890625,
+    "figCls": "art"
+  },
+  {
+    "kind": "observe",
+    "layout": "solid",
+    "level": "a2_5",
+    "prompt": "正方体有几个面？",
+    "fig": "163x163",
+    "figArea": 26696.496337890625,
+    "figCls": "art"
+  },
+  {
+    "kind": "angle2",
+    "layout": "angle",
+    "level": "c4_3",
+    "prompt": "这个角是多少度？",
+    "fig": "163x163",
+    "figArea": 26696.496337890625,
+    "figCls": "art"
+  },
+  {
+    "kind": "polyarea",
+    "layout": "polygonarea",
+    "level": "e5_6",
+    "prompt": "三角形底 13 厘米、高 8 厘米，面积是（ ）平方厘米",
+    "fig": "163x163",
+    "figArea": 26696.496337890625,
+    "figCls": "art"
+  },
+  {
+    "kind": "cuboid",
+    "layout": "solid",
+    "level": "f5_3",
+    "prompt": "棱长 7 厘米的正方体，体积是（ ）立方厘米",
+    "fig": "163x163",
+    "figArea": 26696.496337890625,
+    "figCls": "art"
+  },
+  {
+    "kind": "circle",
+    "layout": "circle",
+    "level": "g6_5",
+    "prompt": "半径 7 厘米的圆，周长是（ ）厘米（π 取 3.14）",
+    "fig": "163x163",
+    "figArea": 26696.496337890625,
+    "figCls": "art"
+  },
+  {
+    "kind": "cylinder",
+    "layout": "cylinder",
+    "level": "h6_3",
+    "prompt": "底面半径 3、高 5 厘米的圆锥体积是（ ）立方厘米",
+    "fig": "163x163",
+    "figArea": 26696.496337890625,
+    "figCls": "art"
+  },
+  {
+    "kind": "planting",
+    "layout": "planting",
+    "level": "e5_7",
+    "prompt": "一条 14 米的小路，每 4 米种一棵树，两端都不种，共种（ ）棵",
+    "fig": "330x84",
+    "figArea": 27585.9375,
+    "figCls": "art art-plant"
+  },
+  {
+    "kind": "multable2",
+    "layout": "group",
+    "level": "a2_6",
+    "prompt": "5 × 6 = （ ）",
+    "fig": "283x98",
+    "figArea": 27699.5947265625,
+    "figCls": "group-fig"
+  },
+  {
+    "kind": "fraction",
+    "layout": "fraction",
+    "level": "g8",
+    "prompt": "涂色部分占整个图形的几分之几？",
+    "fig": "170x170",
+    "figArea": 28900,
+    "figCls": "art art-pie"
+  },
+  {
+    "kind": "sub20",
+    "layout": "numline",
+    "level": "a1_2",
+    "prompt": "14 减去 8，从 14 往左数 8 格",
+    "fig": "340x86",
+    "figArea": 29282.5,
+    "figCls": "art art-numline"
+  },
+  {
+    "kind": "add100",
+    "layout": "numline",
+    "level": "a1_6",
+    "prompt": "从 40 开始，加 10",
+    "fig": "340x86",
+    "figArea": 29282.5,
+    "figCls": "art art-numline"
+  },
+  {
+    "kind": "negative",
+    "layout": "numline",
+    "level": "h6_1",
+    "prompt": "在数轴上，越靠右的数越大。哪个更大？",
+    "fig": "340x86",
+    "figArea": 29282.5,
+    "figCls": "art art-numline"
+  },
+  {
+    "kind": "factor",
+    "layout": "tiles",
+    "level": "f5_2",
+    "prompt": "8 和 8 的最大公因数是（ ）",
+    "fig": "172x172",
+    "figArea": 29584,
+    "figCls": "art art-tiles"
+  },
+  {
+    "kind": "piechart",
+    "layout": "piechart",
+    "level": "g6_7",
+    "prompt": "一共 200 人，占 30% 的那部分有多少人？",
+    "fig": "172x172",
+    "figArea": 29584,
+    "figCls": "art art-pie2"
+  },
+  {
+    "kind": "weigh",
+    "layout": "balance",
+    "level": "f5_8",
+    "prompt": "27 个零件中 1 个次品（轻一些），用天平至少称（ ）次找出",
+    "fig": "249x125",
+    "figArea": 31095.8935546875,
+    "figCls": "art art-balance"
+  },
+  {
+    "kind": "length",
+    "layout": "unitruler",
+    "level": "a2_1",
+    "prompt": "9 厘米 = （ ）毫米",
+    "fig": "330x95",
+    "figArea": 31215.9375,
+    "figCls": "art art-units"
+  },
+  {
+    "kind": "weight",
+    "layout": "unitruler",
+    "level": "b2_8",
+    "prompt": "3 千克 = （ ）克",
+    "fig": "330x95",
+    "figArea": 31215.9375,
+    "figCls": "art art-units"
+  },
+  {
+    "kind": "areaunit",
+    "layout": "unitruler",
+    "level": "c4_2",
+    "prompt": "2 公顷 = （ ）平方米",
+    "fig": "330x95",
+    "figArea": 31215.9375,
+    "figCls": "art art-units"
+  },
+  {
+    "kind": "divtable",
+    "layout": "group",
+    "level": "b2_2",
+    "prompt": "36 ÷ 6 = （ ）",
+    "fig": "341x98",
+    "figArea": 33337.294921875,
+    "figCls": "group-fig"
+  },
+  {
+    "kind": "linechart",
+    "layout": "linechart",
+    "level": "f5_7",
+    "prompt": "哪个月最多？",
+    "fig": "300x112",
+    "figArea": 33539.0625,
+    "figCls": "art art-line"
+  },
+  {
+    "kind": "combo",
+    "layout": "combo",
+    "level": "g17",
+    "prompt": "用 2、5、1 三张数字卡，能组成多少个不同的两位数？",
+    "fig": "372x90",
+    "figArea": 33625.3125,
+    "figCls": "combo-fig"
+  },
+  {
+    "kind": "table",
+    "layout": "table",
+    "level": "g12",
+    "prompt": "哪个项目参加的人数最多？",
+    "fig": "330x103",
+    "figArea": 33845.625,
+    "figCls": "stat-table"
+  },
+  {
+    "kind": "clock1",
+    "layout": "clock",
+    "level": "lv7",
+    "prompt": "钟面上是几时？",
+    "fig": "198x198",
+    "figArea": 39123.603759765625,
+    "figCls": "art art-clock"
+  },
+  {
+    "kind": "clock2",
+    "layout": "clock2",
+    "level": "a2_7",
+    "prompt": "现在是几时几分？",
+    "fig": "198x198",
+    "figArea": 39123.603759765625,
+    "figCls": "art art-clock"
+  },
+  {
+    "kind": "rotation",
+    "layout": "clock",
+    "level": "f5_6",
+    "prompt": "时针走 1 小时，旋转了（ ）度",
+    "fig": "198x198",
+    "figArea": 39123.603759765625,
+    "figCls": "art art-clock"
+  },
+  {
+    "kind": "money",
+    "layout": "money",
+    "level": "a1_5",
+    "prompt": "这些钱一共是多少角？",
+    "fig": "300x146",
+    "figArea": 43772.00244140625,
+    "figCls": "art art-money"
+  },
+  {
+    "kind": "pigeon",
+    "layout": "pigeon",
+    "level": "h6_5",
+    "prompt": "把 5 只鸽子放进 4 个笼子，至少有一个笼子里有（ ）只鸽子",
+    "fig": "320x137",
+    "figArea": 43885,
+    "figCls": "art art-pigeon"
+  },
+  {
+    "kind": "barchart",
+    "layout": "barchart",
+    "level": "c4_7",
+    "prompt": "语文比数学多多少人？",
+    "fig": "330x146",
+    "figArea": 48241.875,
+    "figCls": "barchart-fig"
+  },
+  {
+    "kind": "perimeter",
+    "layout": "rect",
+    "level": "g7",
+    "prompt": "长方形的长是 3 厘米，宽是 2 厘米，周长是多少？",
+    "fig": "224x224",
+    "figArea": 49994.1650390625,
+    "figCls": "art art-rect"
+  },
+  {
+    "kind": "area",
+    "layout": "rect",
+    "level": "g14",
+    "prompt": "正方形边长 10 分米，面积是多少？",
+    "fig": "224x224",
+    "figArea": 49994.1650390625,
+    "figCls": "art art-rect"
+  },
+  {
+    "kind": "venn",
+    "layout": "venn",
+    "level": "g9",
+    "prompt": "参加语文的 8 人，数学的 6 人，两项都参加的 3 人。一共有多少人？",
+    "fig": "340x170",
+    "figArea": 57800,
+    "figCls": "art art-venn"
+  },
+  {
+    "kind": "coords",
+    "layout": "coords",
+    "level": "e5_2",
+    "prompt": "红点的横坐标是（ ）",
+    "fig": "260x260",
+    "figArea": 67600,
+    "figCls": "coord-fig"
+  }
+]

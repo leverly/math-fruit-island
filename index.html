@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#7FD8FF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='45' r='40' fill='%23F0207E'/%3E%3C/svg%3E">
+<title>水果数学岛 · Fruit Math Island</title>
+<link rel="stylesheet" href="css/base.css?v=1">
+<link rel="stylesheet" href="css/scene.css?v=2">
+<link rel="stylesheet" href="css/game.css?v=20">
+<link rel="stylesheet" href="css/board.css?v=46">
+</head>
+<body>
+<div id="app" class="app">
+
+  <!-- 背景：天空 / 海面 / 沙滩 / 云 / 彩纸 -->
+  <div class="bg" aria-hidden="true">
+    <div class="bg-sky"></div>
+    <div class="bg-sun"></div>
+    <div class="bg-clouds" id="bgClouds"></div>
+    <div class="bg-hills"></div>
+    <div class="bg-sea">
+      <i class="wave w1"></i><i class="wave w2"></i><i class="wave w3"></i>
+    </div>
+    <div class="bg-sand"></div>
+    <div class="bg-confetti" id="bgConfetti"></div>
+  </div>
+
+  <!-- ============ 主页 ============ -->
+  <section id="scrHome" class="screen home">
+    <div class="home-head">
+      <div class="home-hud">
+        <div class="pill"><i class="ico-coin"></i><b id="coinNum">0</b></div>
+        <div class="pill"><i class="ico-star"></i><b id="starNum">0</b></div>
+      </div>
+    </div>
+
+    <div class="picker-row">
+      <div class="grade-picker" id="gradePicker" role="tablist" aria-label="选择年级"></div>
+      <div class="term-picker" id="termPicker" role="tablist" aria-label="选择学期"></div>
+    </div>
+
+    <div class="home-hero">
+      <div class="hero-lion" id="homeLion"></div>
+      <div class="hero-bubble" id="homeTip">选一座小岛开始吧！</div>
+    </div>
+
+    <div class="continue-card" id="continueCard">
+      <div class="cont-glow" aria-hidden="true"></div>
+      <div class="cont-art" id="contArt"></div>
+      <div class="cont-left">
+        <span class="cont-meta">
+          <span class="cont-label" id="contLabel">下一关</span>
+          <span class="cont-type type-practice" id="contType">练习</span>
+        </span>
+        <b class="cont-title" id="contTitle">第 1 关 · 数一数</b>
+        <span class="cont-sub" id="contSub">苹果岛 · 共 10 题</span>
+        <div class="cont-meter"><i id="contFill"></i></div>
+        <span class="cont-progress" id="contProgress">第 1 / 8 关</span>
+      </div>
+    </div>
+    <button class="big-btn cont-go" id="btnContinue">开始第 1 关</button>
+
+  </section>
+
+  <!-- ============ 游戏 ============ -->
+  <section id="scrGame" class="screen game hidden">
+    <div class="game-hud">
+      <button class="round-btn small" id="btnQuit" aria-label="退出">‹</button>
+      <div class="hearts" id="hearts"></div>
+      <div class="hud-right">
+        <div class="pill small"><i class="ico-coin"></i><b id="gameCoin">0</b></div>
+        <div class="combo-tag" id="comboTag">×0</div>
+      </div>
+    </div>
+
+    <div class="progress-row">
+      <div class="tier-pill" id="tierPill" aria-label="题目难度" title="题目难度"><i></i><i></i><i></i><i></i></div>
+      <div class="progress-track"><i id="progFill"></i></div>
+      <span id="progText">1/10</span>
+    </div>
+
+    <!-- 紫色标题条（参考图同款） -->
+    <div class="ribbon" id="ribbon"><span id="ribbonText">学习减法</span></div>
+
+    <!-- Boss 血条 -->
+    <div class="boss-bar hidden" id="bossBar">
+      <span class="boss-ico">🐵</span>
+      <div class="boss-track"><i id="bossFill"></i></div>
+      <span class="boss-time" id="bossTime">30</span>
+    </div>
+
+    <div class="stage" id="stage">
+      <!-- 狮子伙伴 + 气泡 -->
+      <div class="lion-row">
+        <div class="lion-slot" id="gameLion"></div>
+        <div class="bubble" id="bubble">数一数有几个？</div>
+      </div>
+
+      <!-- 题目区：由 JS 渲染（卡片/气球/黑板） -->
+      <div class="board" id="board"></div>
+    </div>
+
+    <div class="fever-glow" id="feverGlow" aria-hidden="true"></div>
+  </section>
+
+  <!-- ============ 结算 ============ -->
+  <section id="scrResult" class="screen result hidden">
+    <div class="confetti-layer" id="resultConfetti" aria-hidden="true"></div>
+    <div class="result-panel">
+      <p class="res-kicker" id="resKicker">小岛通关</p>
+      <h2 class="res-title" id="resTitle">苹果岛探险成功！</h2>
+      <div class="res-stars" id="resStars">
+        <i data-i="0"></i><i data-i="1"></i><i data-i="2"></i>
+      </div>
+      <div class="res-lion" id="resLion"></div>
+      <div class="res-stats">
+        <div class="stat"><span>🪙</span><b id="resCoin">0</b><small>金币</small></div>
+        <div class="stat"><span>🔥</span><b id="resCombo">0</b><small>最高连击</small></div>
+        <div class="stat"><span>✅</span><b id="resCorrect">0</b><small>答对</small></div>
+      </div>
+      <div class="res-unlocks" id="resUnlocks"></div>
+      <div class="res-actions">
+        <button class="big-btn" id="btnAgain">再来一局</button>
+        <button class="ghost-btn" id="btnMedals">查看勋章</button>
+        <button class="ghost-btn" id="btnHome">回主界面</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 图鉴 ============ -->
+  <section id="scrDex" class="screen dex hidden">
+    <div class="page-head">
+      <button class="round-btn small" id="btnDexBack" aria-label="返回">‹</button>
+      <h2 class="page-title">我的勋章</h2>
+      <div class="pill small"><span id="dexCount">0/16</span></div>
+    </div>
+
+    <!-- 连续挑战大横幅（核心） -->
+    <div class="streak-hero" id="streakHero">
+      <div class="sh-glow" aria-hidden="true"></div>
+      <div class="sh-flame" id="shFlame"></div>
+      <div class="sh-main">
+        <div class="sh-num"><b id="shDays">0</b><span>天</span></div>
+        <div class="sh-label">连续完成挑战</div>
+      </div>
+      <div class="sh-side">
+        <span class="sh-rec">最长 <b id="shBest">0</b> 天</span>
+        <span class="sh-today" id="shToday">今天还没来</span>
+      </div>
+    </div>
+    <!-- 近 7 天打卡格 -->
+    <div class="week-strip" id="weekStrip"></div>
+
+    <div class="badge-groups" id="badgeGroups"></div>
+
+    <!-- 家长区：重置进度（孩子不会误点） -->
+    <div class="parent-zone">
+      <button class="reset-btn" id="btnReset">清空全部进度</button>
+      <p class="parent-note">金币、星星、勋章、关卡记录都会清除，且无法恢复</p>
+    </div>
+  </section>
+
+  <!-- ============ 浮层 ============ -->
+  <div class="overlay hidden" id="ovEvent">
+    <div class="event-card">
+      <div class="ev-shine"></div>
+      <div class="ev-emoji" id="evEmoji">💰</div>
+      <h3 id="evTitle">金币雨</h3>
+      <p id="evDesc">接下来 2 题金币翻倍！</p>
+      <button class="big-btn" id="evOk">收下啦</button>
+    </div>
+  </div>
+
+  <div class="overlay hidden" id="ovBoss">
+    <div class="boss-card">
+      <div class="boss-face">🐵</div>
+      <h3>抢水果猴出现！</h3>
+      <p>30 秒快问快答，答对就把它打退！</p>
+      <button class="big-btn" id="bossOk">开打！</button>
+    </div>
+  </div>
+
+  <div class="overlay hidden" id="ovRescue">
+    <div class="rescue-wrap">
+      <h3>🆘 Bobo 饿肚子啦！</h3>
+      <p>接住掉下来的水果，接住 5 个就回血</p>
+      <div class="rescue-timer"><i id="rescueFill"></i><span id="rescueTime">12</span></div>
+      <div class="rescue-score">已接住 <b id="rescueGot">0</b> / 5</div>
+      <div class="rescue-field" id="rescueField"></div>
+    </div>
+  </div>
+
+  <div class="overlay hidden" id="ovPause">
+    <div class="pause-card">
+      <h3>休息一下～</h3>
+      <p>Bobo 在原地等你</p>
+      <button class="big-btn" id="pauseGo">继续</button>
+      <button class="ghost-btn" id="pauseQuit">结束本局</button>
+    </div>
+  </div>
+
+  <div class="fx" id="fx" aria-hidden="true"></div>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+</div>
+
+<script src="js/art.js?v=3"></script>
+<script src="js/difficulty.js?v=1"></script>
+<script src="js/data.js?v=11"></script>
+<script src="js/units.js?v=44"></script>
+<script src="js/badges.js?v=1"></script>
+<script src="js/audio.js?v=2"></script>
+<script src="js/scene.js?v=1"></script>
+<script src="js/store.js?v=4"></script>
+<script src="js/board.js?v=79"></script>
+<script src="js/fx.js?v=1"></script>
+<script src="js/game.js?v=11"></script>
+<script src="js/app.js?v=14"></script>
+</body>
+</html>

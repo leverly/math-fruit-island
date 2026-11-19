@@ -1,0 +1,145 @@
+/* ===== 场景背景：天空 / 阳光 / 云 / 远山 / 海面 / 沙滩 / 彩纸 ===== */
+.bg {
+  position: fixed;
+  left: 50%; top: 0;
+  width: 100%; max-width: 480px;
+  height: 100vh;
+  transform: translateX(-50%);
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+@media (min-width: 481px) {
+  /* .app 在宽屏下是垂直居中的，场景必须跟着一起居中，
+     否则背景贴在视口顶部、内容却在中段，会出现「上面一片空天空」 */
+  .bg {
+    top: 50%;
+    height: min(900px, calc(100dvh - 36px));
+    transform: translate(-50%, -50%);
+    border-radius: 28px;
+  }
+}
+
+/* 天空：上深下浅的青蓝渐变（参考图） */
+.bg-sky {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg,
+      #5EC8F0 0%,
+      #7FD8FF 16%,
+      #A5E6FF 32%,
+      #C9F1FF 44%,
+      #6FD3EE 46%,
+      #2FB4D8 58%,
+      #159ABF 72%,
+      #0B7C9B 100%);
+}
+
+/* 阳光光晕 */
+.bg-sun {
+  position: absolute;
+  left: 50%; top: -22%;
+  width: 120%; height: 70%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at 50% 30%, rgba(255,255,255,.85) 0%, rgba(255,255,255,.35) 26%, transparent 58%);
+  filter: blur(6px);
+}
+
+/* 云 */
+.bg-clouds { position: absolute; left: 0; right: 0; top: 0; height: 40%; }
+.art-cloud {
+  position: absolute;
+  width: 120px; height: auto;
+  filter: drop-shadow(0 4px 8px rgba(80,170,210,.28));
+}
+
+/* 远山（参考图里那层绿色山丘） */
+.bg-hills {
+  position: absolute;
+  left: -6%; right: -6%;
+  top: 30%;
+  height: 20%;
+  background:
+    radial-gradient(58% 100% at 12% 100%, #7FD86A 0%, #4FB63C 60%, #2F8A24 100%),
+    radial-gradient(52% 100% at 44% 100%, #8FE07A 0%, #57C142 62%, #358F28 100%),
+    radial-gradient(60% 100% at 78% 100%, #7FD86A 0%, #4FB63C 60%, #2F8A24 100%);
+  background-size: 46% 100%, 50% 100%, 46% 100%;
+  background-position: 0 100%, 50% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  opacity: .95;
+}
+.bg-hills::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: 0; height: 26%;
+  background: linear-gradient(180deg, rgba(255,255,255,.35), transparent);
+}
+
+/* 海面 */
+.bg-sea {
+  position: absolute;
+  left: 0; right: 0;
+  top: 42%;
+  bottom: 12%;
+  background:
+    linear-gradient(180deg,
+      rgba(120,220,245,.55) 0%,
+      rgba(35,175,205,.85) 22%,
+      #1287A8 62%,
+      #0A6E8C 100%);
+  overflow: hidden;
+}
+/* 波纹 */
+.wave {
+  position: absolute; left: -20%; right: -20%;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 70%);
+}
+.wave.w1 { top: 12%; animation: waveMove 7s ease-in-out infinite; }
+.wave.w2 { top: 34%; opacity: .8; animation: waveMove 9s ease-in-out infinite reverse; }
+.wave.w3 { top: 58%; opacity: .6; animation: waveMove 11s ease-in-out infinite; }
+@keyframes waveMove {
+  0%, 100% { transform: translateX(-2%) scaleY(1); }
+  50% { transform: translateX(2%) scaleY(1.25); }
+}
+/* 海面高光条 */
+.bg-sea::after {
+  content: '';
+  position: absolute; left: 0; right: 0; top: 0; height: 30%;
+  background:
+    radial-gradient(30% 60% at 22% 30%, rgba(255,255,255,.42), transparent 70%),
+    radial-gradient(24% 50% at 62% 20%, rgba(255,255,255,.3), transparent 70%),
+    radial-gradient(26% 55% at 84% 44%, rgba(255,255,255,.26), transparent 70%);
+}
+
+/* 沙滩 */
+.bg-sand {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 14%;
+  background:
+    radial-gradient(70% 100% at 50% 0%, #FFE0A8 0%, #FFC97A 45%, #F0A94E 100%);
+  border-radius: 46% 46% 0 0 / 22% 22% 0 0;
+}
+.bg-sand::before {
+  content: '';
+  position: absolute; left: 0; right: 0; top: -6px; height: 16px;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,.8), transparent 70%);
+}
+
+/* 彩纸 */
+.bg-confetti { position: absolute; inset: 0; }
+.bg-confetti i {
+  position: absolute;
+  width: 9px; height: 5px;
+  border-radius: 1.5px;
+  opacity: .95;
+  animation: confettiDrift linear infinite;
+}
+@keyframes confettiDrift {
+  0% { transform: translateY(-30px) rotate(0deg); opacity: 0; }
+  10% { opacity: .95; }
+  90% { opacity: .9; }
+  100% { transform: translateY(110vh) rotate(540deg); opacity: 0; }
+}
