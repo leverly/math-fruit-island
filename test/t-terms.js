@@ -25,7 +25,19 @@ const URL = 'http://127.0.0.1:8152/?r=' + Date.now();
     ok('92 个关卡', meta.levels === 92, String(meta.levels));
     ok('每个学期都有内容', meta.empty.length === 0, meta.empty.join(','));
 
-    console.log('\n[选择器渲染]');
+    console.log('\n[首页只显示当前年级学期]');
+    const homeBadge = await evalJs(cdp, `({
+      badge: document.getElementById('stageGrade').textContent + ' ' + document.getElementById('stageTerm').textContent,
+      pickerOnHome: !!document.querySelector('#scrHome .grade-picker'),
+      gear: !!document.getElementById('btnSettings')
+    })`);
+    ok('首页显示当前年级学期', homeBadge.badge === '1年级 上册', homeBadge.badge);
+    ok('首页不再有年级切换器', homeBadge.pickerOnHome === false);
+    ok('首页有设置入口', homeBadge.gear === true);
+
+    console.log('\n[设置页选择器]');
+    await clickSel(cdp, '#btnSettings');
+    await sleep(400);
     const ui = await evalJs(cdp, `({
       gradeBtns: document.querySelectorAll('#gradePicker .grade-btn').length,
       termBtns: document.querySelectorAll('#termPicker .term-btn').length,
@@ -38,10 +50,13 @@ const URL = 'http://127.0.0.1:8152/?r=' + Date.now();
     ok('2 个学期按钮', ui.termBtns === 2, String(ui.termBtns));
     ok('默认一年级上册', ui.activeGrade === '1年级' && ui.activeTerm.indexOf('上册') >= 0, JSON.stringify(ui));
     ok('第一关是一年级上册首关', ui.firstLevel === 'lv1', ui.firstLevel);
-    await shot(cdp, 't-home-g1up');
+    await shot(cdp, 't-settings');
 
     console.log('\n[切换年级]');
     await clickSel(cdp, '#gradePicker .grade-btn:nth-child(6)');
+    await sleep(500);
+    /* 切换后仍在设置页，回首页看结果 */
+    await clickSel(cdp, '#btnSettingsBack');
     await sleep(500);
     const g6 = await evalJs(cdp, `({
       grade: MFI.Store.get().grade,
@@ -54,7 +69,11 @@ const URL = 'http://127.0.0.1:8152/?r=' + Date.now();
     await shot(cdp, 't-home-g6up');
 
     console.log('\n[切换学期]');
+    await clickSel(cdp, '#stageBadge');
+    await sleep(400);
     await clickSel(cdp, '#termPicker .term-btn:nth-child(2)');
+    await sleep(400);
+    await clickSel(cdp, '#btnSettingsBack');
     await sleep(500);
     const g6d = await evalJs(cdp, `({
       term: MFI.Store.get().term,
@@ -176,6 +195,8 @@ const URL = 'http://127.0.0.1:8152/?r=' + Date.now();
     ok('通关后推进到第 2 关', after.level === 'lv2', before + ' → ' + JSON.stringify(after));
 
     console.log('\n[学期切换按钮显示进度]');
+    await clickSel(cdp, '#stageBadge');
+    await sleep(400);
     const terms = await evalJs(cdp, `[...document.querySelectorAll('#termPicker .term-btn')].map(b => b.textContent)`);
     ok('学期按钮带完成进度', terms[0].indexOf('/') > 0, JSON.stringify(terms));
 

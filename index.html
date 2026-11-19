@@ -8,7 +8,7 @@
 <title>水果数学岛 · Fruit Math Island</title>
 <link rel="stylesheet" href="css/base.css?v=1">
 <link rel="stylesheet" href="css/scene.css?v=2">
-<link rel="stylesheet" href="css/game.css?v=20">
+<link rel="stylesheet" href="css/game.css?v=25">
 <link rel="stylesheet" href="css/board.css?v=46">
 </head>
 <body>
@@ -33,13 +33,19 @@
       <div class="home-hud">
         <div class="pill"><i class="ico-coin"></i><b id="coinNum">0</b></div>
         <div class="pill"><i class="ico-star"></i><b id="starNum">0</b></div>
+        <button class="round-btn gear-btn" id="btnSettings" aria-label="设置">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7zm7.4-2.6c.04-.3.07-.6.07-.9s-.03-.6-.07-.9l2-1.5-1.9-3.3-2.3.9c-.5-.4-1-.7-1.6-.9l-.3-2.4h-3.8l-.3 2.4c-.6.2-1.1.5-1.6.9l-2.3-.9-1.9 3.3 2 1.5c-.04.3-.07.6-.07.9s.03.6.07.9l-2 1.5 1.9 3.3 2.3-.9c.5.4 1 .7 1.6.9l.3 2.4h3.8l.3-2.4c.6-.2 1.1-.5 1.6-.9l2.3.9 1.9-3.3-2-1.5z"/></svg>
+        </button>
       </div>
     </div>
 
-    <div class="picker-row">
-      <div class="grade-picker" id="gradePicker" role="tablist" aria-label="选择年级"></div>
-      <div class="term-picker" id="termPicker" role="tablist" aria-label="选择学期"></div>
-    </div>
+    <!-- 当前年级 / 学期：只展示，切换在设置里 -->
+    <button class="stage-badge" id="stageBadge">
+      <span id="stageGrade">1年级</span>
+      <i></i>
+      <span id="stageTerm">上册</span>
+      <em>切换</em>
+    </button>
 
     <div class="home-hero">
       <div class="hero-lion" id="homeLion"></div>
@@ -162,6 +168,31 @@
     </div>
   </section>
 
+  <!-- ============ 设置 ============ -->
+  <section id="scrSettings" class="screen settings hidden">
+    <div class="page-head">
+      <button class="round-btn small" id="btnSettingsBack" aria-label="返回">‹</button>
+      <h2 class="page-title">设置</h2>
+    </div>
+
+    <p class="set-hint">选择要练习的年级和学期，首页会显示对应内容</p>
+
+    <div class="set-block">
+      <span class="set-label">年级</span>
+      <div class="grade-picker" id="gradePicker" role="tablist" aria-label="选择年级"></div>
+    </div>
+
+    <div class="set-block">
+      <span class="set-label">学期</span>
+      <div class="term-picker" id="termPicker" role="tablist" aria-label="选择学期"></div>
+    </div>
+
+    <div class="set-block">
+      <span class="set-label">声音</span>
+      <button class="set-toggle" id="btnSoundToggle">开启</button>
+    </div>
+  </section>
+
   <!-- ============ 浮层 ============ -->
   <div class="overlay hidden" id="ovEvent">
     <div class="event-card">
@@ -216,6 +247,6 @@
 <script src="js/board.js?v=79"></script>
 <script src="js/fx.js?v=1"></script>
 <script src="js/game.js?v=11"></script>
-<script src="js/app.js?v=14"></script>
+<script src="js/app.js?v=16"></script>
 </body>
 </html>

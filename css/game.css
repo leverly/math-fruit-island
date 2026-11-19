@@ -758,3 +758,104 @@
 .cont-type.type-practice { background: rgba(39,148,221,.16); color: #1667A8; }
 .cont-type.type-challenge { background: linear-gradient(180deg, #FFB3D8, #F0207E); color: #fff; }
 .cont-type.type-story { background: linear-gradient(180deg, #B8F0A8, #42B62A); color: #fff; }
+
+/* ================= 首页：当前年级学期徽章 ================= */
+.home-hud .gear-btn {
+  margin-left: auto;
+  display: flex; align-items: center; justify-content: center;
+}
+.home-hud .gear-btn svg {
+  width: 20px; height: 20px; display: block;
+  fill: var(--purple-d);
+}
+/* 只展示不切换，点击进入设置 */
+.stage-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  align-self: flex-start;
+  margin-top: 2px; padding: 6px 13px 6px 12px;
+  border: 0; border-radius: 999px;
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 3px 0 rgba(122,43,184,.22), 0 5px 12px rgba(0,0,0,.1);
+  font-family: inherit; font-size: 13px; font-weight: 900; color: var(--purple-d);
+  cursor: pointer; touch-action: manipulation;
+}
+.stage-badge:active { transform: translateY(1px); box-shadow: 0 2px 0 rgba(122,43,184,.22); }
+.stage-badge i {
+  width: 3px; height: 3px; border-radius: 50%;
+  background: rgba(122,43,184,.4);
+}
+.stage-badge em {
+  font-style: normal; font-size: 10.5px; font-weight: 900;
+  padding: 1px 7px; border-radius: 999px;
+  color: #fff; background: linear-gradient(180deg, #B478F0, #8B3FD8);
+}
+
+/* ================= 设置页 ================= */
+.settings { gap: 10px; }
+.settings .page-head { display: flex; align-items: center; gap: 8px; }
+.settings .page-head .page-title { margin: 0; }
+.settings .page-head .pill { margin-left: auto; }
+/* 标题沿用页面统一风格 */
+.settings .page-title {
+  font-size: 20px; font-weight: 900; color: var(--ink);
+  text-shadow: 0 2px 0 rgba(255,255,255,.7);
+}
+/* 提示文字加胶囊底板，避免落在山丘/海面上看不清 */
+.set-hint {
+  margin: 0; align-self: flex-start;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.9);
+  box-shadow: 0 2px 0 rgba(122,43,184,.18);
+  font-size: 12px; font-weight: 800; color: var(--ink-2);
+}
+/* 设置块用不透明奶油底：页面下半截是山丘与海面，
+   半透明底会让文字在深色背景上糊掉 */
+.set-block {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 12px 13px 13px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #FFFDF5 0%, #FFF3DE 100%);
+  box-shadow: 0 4px 0 rgba(122,43,184,.22), 0 7px 14px rgba(0,0,0,.12);
+  border: 2px solid rgba(255,255,255,.85);
+}
+.set-label {
+  font-size: 12px; font-weight: 900; color: var(--ink-2);
+}
+.set-block .grade-picker {
+  background: rgba(122,43,184,.09);
+  box-shadow: inset 0 1px 3px rgba(122,43,184,.14);
+}
+.set-block .grade-btn { color: #6B5C86; text-shadow: none; }
+.set-block .grade-btn.on {
+  background: #fff; color: var(--purple-d);
+  box-shadow: 0 3px 0 rgba(122,43,184,.24), inset 0 0 0 2px rgba(139,63,216,.35);
+}
+.set-block .term-btn { background: rgba(255,255,255,.94); }
+.set-toggle {
+  align-self: flex-start;
+  min-height: 40px; padding: 0 20px;
+  border: 0; border-radius: 12px;
+  background: linear-gradient(180deg, #8CE86A 0%, #42B62A 60%, #2E8F1C 100%);
+  box-shadow: 0 3px 0 #1F6B12, inset 0 0 0 2.5px rgba(255,255,255,.85);
+  font-family: inherit; font-size: 13px; font-weight: 900; color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,.28);
+  cursor: pointer; touch-action: manipulation;
+}
+.set-toggle.off {
+  background: linear-gradient(180deg, #C8C2D4 0%, #9C93AE 60%, #7C7290 100%);
+  box-shadow: 0 3px 0 #5E556E, inset 0 0 0 2.5px rgba(255,255,255,.7);
+}
+.set-toggle:active { transform: translateY(2px); }
+
+/* 窄屏：6 个年级按钮要一行放得下，不能折行 */
+.set-block .grade-btn {
+  white-space: nowrap;
+  font-size: 12px;
+}
+@media (max-width: 360px) {
+  .set-block { padding: 10px 10px 11px; }
+  .set-block .grade-picker { gap: 2px; padding: 3px 4px; }
+  .set-block .grade-btn { font-size: 11px; min-height: 40px; padding: 0 2px; }
+  .set-badge, .stage-badge { font-size: 12px; }
+}

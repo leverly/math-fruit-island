@@ -61,7 +61,7 @@
         MFI.Audio.play('click');
         MFI.Audio.play('whoosh');
         store.setGrade(gr.id);
-        renderHome();
+        if (current === 'settings') renderSettings(); else renderHome();
       });
       host.appendChild(b);
     });
@@ -85,11 +85,27 @@
         MFI.Audio.play('click');
         MFI.Audio.play('whoosh');
         store.setTerm(tm.id);
-        renderHome();
+        if (current === 'settings') renderSettings(); else renderHome();
       });
       host.appendChild(b);
     });
   }
+
+  /* ---------- 设置页 ---------- */
+  function renderSettings() {
+    renderGradePicker();
+    renderTermPicker();
+    var muted = store.get().muted;
+    var tg = $('btnSoundToggle');
+    if (tg) {
+      tg.textContent = muted ? '已关闭' : '开启';
+      tg.classList.toggle('off', !!muted);
+    }
+  }
+  A.openSettings = function () {
+    renderSettings();
+    show('settings');
+  };
 
   function renderHome() {
     var d = store.get();
@@ -99,9 +115,11 @@
 
     MFI.Scene.mountLion($('homeLion'));
 
-    /* 选择器 */
-    renderGradePicker();
-    renderTermPicker();
+    /* 首页只展示当前年级/学期，切换在设置页 */
+    var gDef = D.gradeOf(gid), tDef = D.termOf(tid);
+    var sg = $('stageGrade'), st = $('stageTerm');
+    if (sg) sg.textContent = gDef.short + '年级';
+    if (st) st.textContent = tDef.name;
 
     /* 本学期该打的关：第一个未通关的 */
     var doneN = 0, curIdx = -1;
@@ -454,6 +472,27 @@
       renderHome();
       show('home');
     });
+    $('btnSettings').addEventListener('click', function () {
+      MFI.Audio.play('click');
+      A.openSettings();
+    });
+    $('stageBadge').addEventListener('click', function () {
+      MFI.Audio.play('click');
+      A.openSettings();
+    });
+    $('btnSettingsBack').addEventListener('click', function () {
+      MFI.Audio.play('click');
+      renderHome();
+      show('home');
+    });
+    $('btnSoundToggle').addEventListener('click', function () {
+      var d = store.get();
+      d.muted = !d.muted;
+      store.save();
+      MFI.Audio.setMuted(!!d.muted);
+      if (!d.muted) MFI.Audio.play('click');
+      renderSettings();
+    });
     $('btnAgain').addEventListener('click', function () {
       MFI.Audio.play('click');
       if (!lastRun) { renderHome(); show('home'); return; }
@@ -502,7 +541,8 @@
     var d = store.get();
 
     screens = {
-      home: $('scrHome'), game: $('scrGame'), result: $('scrResult'), dex: $('scrDex')
+      home: $('scrHome'), game: $('scrGame'), result: $('scrResult'),
+      dex: $('scrDex'), settings: $('scrSettings')
     };
 
     MFI.FX.setLayer($('fx'));
