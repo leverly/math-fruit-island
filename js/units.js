@@ -949,24 +949,69 @@
   /* ============ 一下 U5 认识人民币 ============ */
   U.money = function (lv, diff) {
     var tier = MFI.Diff ? MFI.Diff.tier(diff) : 2;
-    var mode = pick(['conv', 'sum']);
+
+    /* 干扰项优先取「典型错误」：孩子选错时能看出是漏了换算、还是元角颠倒，
+       而不是随便加减出来的数字 */
+    function distract(ans, cands, n) {
+      var out = [], seen = {};
+      seen[ans] = 1;
+      cands.forEach(function (v) {
+        if (out.length >= n) return;
+        v = Math.round(v);
+        if (v <= 0 || seen[v]) return;
+        seen[v] = 1;
+        out.push(opt(v));
+      });
+      var d = 1;
+      while (out.length < n && d < 60) {
+        [ans + d, ans - d].forEach(function (v) {
+          if (out.length >= n || v <= 0 || seen[v]) return;
+          seen[v] = 1;
+          out.push(opt(v));
+        });
+        d++;
+      }
+      return out;
+    }
+
+    var mode = tier <= 1 ? pick(['conv', 'conv', 'sum']) : pick(['conv', 'sum', 'sum']);
+
     if (mode === 'conv') {
-      var y = ri(1, 5);
+      /* 几元 = 多少角（1 元 = 10 角）。图上是 y 张 1 元。 */
+      var y = ri(2, 5);
+      var ansC = y * 10;
+      var optsC = [opt(ansC)].concat(distract(ansC, [
+        y,            /* 忘了换算 */
+        y * 100,      /* 方向反了，当成「分」 */
+        ansC + 10,
+        ansC - 10
+      ], 2));
       return {
         kind: 'money', level: lv.id, layout: 'money',
         mYuan: y, mJiao: 0,
         prompt: '这些钱一共是多少角？',
-        answer: y * 10, options: mkNumOpts(y * 10, 3, 5, 5, 100),
+        answer: ansC, options: shuffle(optsC),
         sig: 'my' + y
       };
     }
-    var a = ri(1, 3), b = ri(1, 4);
-    var ans = a * 10 + b * 10;
+
+    /* 几元几角 = 多少角：元 × 10 + 角，角不再乘 10。
+       图上是 a 张 1 元 + b 枚 1 角。 */
+    var a = ri(1, 4);
+    var b = ri(1, 5);
+    var ansS = a * 10 + b;
+    var optsS = [opt(ansS)].concat(distract(ansS, [
+      a + b,             /* 直接把元数角数相加 */
+      b * 10 + a,        /* 元角颠倒 */
+      a * 10,            /* 只算了元，漏掉角 */
+      ansS + 10,
+      ansS - 1
+    ], 2));
     return {
       kind: 'money', level: lv.id, layout: 'money',
       mYuan: a, mJiao: b,
       prompt: '数一数，一共多少角？',
-      answer: ans, options: mkNumOpts(ans, 3, 10, 10, 120),
+      answer: ansS, options: shuffle(optsS),
       sig: 'ms' + a + b
     };
   };
