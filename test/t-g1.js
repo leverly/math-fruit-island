@@ -12,17 +12,46 @@ const URL = 'http://127.0.0.1:8152/?r=' + Date.now();
     await goto(cdp, URL);
     await sleep(600);
 
+    /* 现在每个教材单元按课时拆成多关，所以按「单元」聚合校验，
+       而不是假设「1 单元 = 1 关」。 */
     console.log('\n[一年级上册 = 教材 8 个单元]');
-    const up = await evalJs(cdp, `MFI.Data.levelsOf('g1','up').map(l => l.unit + ':' + l.skill)`);
-    const expectUp = ['数一数','位置','1~5','认识图形（一）','6~10','11~20','认识钟表','进位加法'];
-    ok('8 个单元', up.length === 8, String(up.length));
-    expectUp.forEach((k, i) => ok('第 ' + (i+1) + ' 单元含「' + k + '」', (up[i]||'').indexOf(k) >= 0, up[i]));
+    const upUnits = await evalJs(cdp, `(() => {
+      const m = {};
+      MFI.Data.levelsOf('g1','up').forEach(l => {
+        const k = l.unit;
+        (m[k] = m[k] || []).push(l.skill);
+      });
+      return Object.keys(m).sort((a,b) => parseInt(a.replace(/\\D/g,'')) - parseInt(b.replace(/\\D/g,''))).map(k => ({ unit: k, skills: m[k] }));
+    })()`);
+    /* 关键字按实际教材课时命名对齐（位置单元拆成上下左右/前后；6~10 单元拆成 6、7 / 8、9 / 连加连减） */
+    const expectUp = ['数一数','左、右','1~5','认识图形（一）','6、7','11~20','认识钟表','加几'];
+    ok('上册 8 个单元', upUnits.length === 8, String(upUnits.length));
+    expectUp.forEach((k, i) => {
+      const u = upUnits[i];
+      const joined = u ? u.skills.join('/') : '';
+      ok('上册第 ' + (i+1) + ' 单元含「' + k + '」', joined.indexOf(k) >= 0, u ? (u.unit + ' ' + joined) : '');
+    });
+    const upTotal = upUnits.reduce((a,u)=>a+u.skills.length,0);
+    ok('上册按课时拆成多关（≥12）', upTotal >= 12, String(upTotal) + ' 关');
 
     console.log('\n[一年级下册 = 教材 7 个单元（总复习已移除）]');
-    const down = await evalJs(cdp, `MFI.Data.levelsOf('g1','down').map(l => l.skill)`);
+    const downUnits = await evalJs(cdp, `(() => {
+      const m = {};
+      MFI.Data.levelsOf('g1','down').forEach(l => {
+        const k = l.unit;
+        (m[k] = m[k] || []).push(l.skill);
+      });
+      return Object.keys(m).sort((a,b) => parseInt(a.replace(/\\D/g,'')) - parseInt(b.replace(/\\D/g,''))).map(k => ({ unit: k, skills: m[k] }));
+    })()`);
     const expectDown = ['认识图形（二）','退位减法','分类与整理','100 以内数的认识','人民币','100 以内加减','找规律'];
-    ok('7 个单元', down.length === 7, String(down.length));
-    expectDown.forEach((k, i) => ok('第 ' + (i+1) + ' 单元含「' + k + '」', (down[i]||'').indexOf(k) >= 0, down[i]));
+    ok('下册 7 个单元', downUnits.length === 7, String(downUnits.length));
+    expectDown.forEach((k, i) => {
+      const u = downUnits[i];
+      const joined = u ? u.skills.join('/') : '';
+      ok('下册第 ' + (i+1) + ' 单元含「' + k + '」', joined.indexOf(k) >= 0, u ? (u.unit + ' ' + joined) : '');
+    });
+    const downTotal = downUnits.reduce((a,u)=>a+u.skills.length,0);
+    ok('下册按课时拆成多关（≥10）', downTotal >= 10, String(downTotal) + ' 关');
 
     console.log('\n[一年级全关出题正确性]');
     const gen = await evalJs(cdp, `(() => {

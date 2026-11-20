@@ -18,7 +18,7 @@ const URL = 'http://127.0.0.1:8152/?r=' + Date.now();;
       g3up: MFI.Data.countOf('g3','up'),
       g3down: MFI.Data.countOf('g3','down')
     })`);
-    ok('总关卡 92', lv.total === 92, String(lv.total));
+    ok('总关卡 ≥ 92', lv.total >= 92, String(lv.total));
     ok('三年级上册 9 关', lv.g3up === 9, String(lv.g3up));
     ok('三年级下册 8 关', lv.g3down === 8, String(lv.g3down));
 

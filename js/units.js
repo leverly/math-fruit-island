@@ -868,7 +868,12 @@
     var tier = MFI.Diff ? MFI.Diff.tier(diff) : 2;
     var hiA = tier <= 1 ? 14 : tier === 2 ? 16 : 18;
     var a = ri(11, hiA);
-    var b = ri(a - 9, 9);
+    /* focus 可锁定减数范围：'minus9' 只减 9，'minus8-7' 减 8 或 7 */
+    var b;
+    if (lv.focus === 'minus9') b = 9;
+    else if (lv.focus === 'minus8-7') b = pick([8, 7]);
+    else b = ri(a - 9, 9);
+    if (a - b < 2) a = b + ri(2, 8);
     var ans = a - b;
     return {
       kind: 'sub20', level: lv.id, layout: 'numline',
@@ -910,7 +915,11 @@
   /* ============ 一下 U4 100 以内数的认识 ============ */
   U.num100 = function (lv, diff) {
     var tier = MFI.Diff ? MFI.Diff.tier(diff) : 2;
-    var mode = pick(['tens', 'compose', 'compare']);
+    var mode = lv.focus === 'count-only'
+      ? pick(['compose', 'compare'])
+      : lv.focus === 'tens-only'
+        ? 'tens'
+        : pick(['tens', 'compose', 'compare']);
     if (mode === 'tens') {
       var n = ri(21, 99);
       var tens = Math.floor(n / 10);
@@ -1019,6 +1028,23 @@
   /* ============ 一下 U6 100 以内加减（一） ============ */
   U.add100 = function (lv, diff) {
     var tier = MFI.Diff ? MFI.Diff.tier(diff) : 2;
+    /* focus='tens' 只出整十数相加减（教材第 6 单元前半段） */
+    if (lv.focus === 'tens') {
+      var isAddT = Math.random() < 0.5;
+      var t1 = ri(1, 8) * 10;
+      var t2 = ri(1, Math.floor((100 - t1) / 10)) * 10;
+      var ansT = isAddT ? t1 + t2 : t1;
+      var bT = isAddT ? t2 : t2;
+      if (!isAddT) { bT = ri(1, t1 / 10) * 10; ansT = t1 - bT; }
+      return {
+        kind: 'add100', level: lv.id, layout: 'numline',
+        nlMin: 0, nlMax: 100, nlStep: 10,
+        nlMarks: [{ v: t1, color: '#2794DD', label: t1 }, { v: ansT, color: '#42B62A', label: '?' }],
+        prompt: isAddT ? (t1 + ' + ' + bT) : (t1 + ' − ' + bT),
+        answer: ansT, options: mkNumOpts(ansT, 3, 10, 0, 100),
+        sig: 'at' + t1 + (isAddT ? '+' : '-') + bT
+      };
+    }
     var isAdd = Math.random() < 0.55;
     if (isAdd) {
       /* 一年级下册只学到 100 以内，和不能超过 100 */
@@ -2754,12 +2780,18 @@
   U.pos = function (lv, diff) {
     var tier = MFI.Diff ? MFI.Diff.tier(diff) : 2;
     /* 每道题给出一个「场景」，用 CSS grid 摆放，让相对位置真实可见 */
-    var scenes = [
+    var allScenes = [
       { rel: '上', scene: 'onTable', q: '小猫在桌子的什么位置？', a: '上面', w: ['下面', '左边', '右边'] },
       { rel: '下', scene: 'underTable', q: '皮球在桌子的什么位置？', a: '下面', w: ['上面', '左边', '右边'] },
       { rel: '左', scene: 'leftOf', q: '大树在小房子的什么位置？', a: '左边', w: ['右边', '上面', '下面'] },
-      { rel: '右', scene: 'rightOf', q: '小花在小房子的什么位置？', a: '右边', w: ['左边', '上面', '下面'] }
+      { rel: '右', scene: 'rightOf', q: '小花在小房子的什么位置？', a: '右边', w: ['左边', '上面', '下面'] },
+      { rel: '前', scene: 'frontOf', q: '小狗在小朋友的什么位置？', a: '前面', w: ['后面', '上面', '下面'] },
+      { rel: '后', scene: 'behindOf', q: '小猫在小朋友的什么位置？', a: '后面', w: ['前面', '上面', '下面'] }
     ];
+    /* focus='before-after' 只考前后（教材第 2 单元后半段） */
+    var scenes = lv.focus === 'before-after'
+      ? allScenes.filter(function (x) { return x.rel === '前' || x.rel === '后'; })
+      : allScenes;
     var it = pick(scenes);
     return {
       kind: 'pos', level: lv.id, layout: 'pos', posScene: it.scene,
@@ -2809,7 +2841,9 @@
   /* ---- 一上 U6 11~20 各数的认识 ---- */
   U.num20 = function (lv, diff) {
     var tier = MFI.Diff ? MFI.Diff.tier(diff) : 2;
-    var mode = pick(['compose', 'order', 'compare']);
+    var mode = lv.focus === 'order-only'
+      ? pick(['order', 'compare'])
+      : pick(['compose', 'order', 'compare']);
     if (mode === 'compose') {
       var t = 1, o = ri(1, 9);
       var val = 10 + o;
@@ -2875,7 +2909,11 @@
   U.carry10 = function (lv, diff) {
     var tier = MFI.Diff ? MFI.Diff.tier(diff) : 2;
     /* 9 加几 / 8 加几 / 7 加几，结果 11~18 */
-    var pool = tier <= 1 ? [9] : tier === 2 ? [9, 8] : [9, 8, 7, 6];
+    var pool = lv.focus === 'nine'
+      ? [9]
+      : lv.focus === 'eight-seven-six'
+        ? [8, 7, 6]
+        : tier <= 1 ? [9] : tier === 2 ? [9, 8] : [9, 8, 7, 6];
     var a = pick(pool);
     /* tier1 只加较小的数（2~5），档位越高加数越大 */
     var bLo = Math.max(11 - a, tier <= 1 ? 2 : 3);
@@ -2893,41 +2931,152 @@
   };
 
   /* ---- 1~5 / 6~10 的认识和加减法：数、比、加减混合 ---- */
+  /* 一年级小数字单元。lv.focus 可指定课时子模式：
+     'know'    只考认数/比大小（第几、分与合、比多少）
+     'addsub'  只考加减
+     'zero'    含 0 的加减
+     'chain'   连加连减、加减混合
+     不传则四类混合（保持旧行为）。 */
   function smallNumUnit(max) {
     return function (lv, diff) {
-      var mode = pick(['count', 'add', 'sub', 'compare']);
+      var focus = lv.focus || '';
+      /* lv.top 可进一步限定数值上限（如「6、7 的认识」只到 7） */
+      var top = lv.top ? Math.min(max, lv.top) : max;
+      var pool = focus === 'know' ? ['count', 'compare']
+        : focus === 'compare-only' ? ['compare']
+        : focus === 'count-only' ? ['count']
+        : focus === 'addsub' ? ['add', 'sub']
+        : focus === 'chain' ? ['chain']
+        : focus === 'zero' ? ['zero']
+        : ['count', 'add', 'sub', 'compare'];
+      var mode = pick(pool);
+
+      if (mode === 'chain') {
+        /* 连加连减 / 加减混合：结果控制在 max 以内，不出现负数 */
+        var c1 = ri(1, Math.min(max, 6));
+        var c2 = ri(1, max - c1);
+        var c3 = ri(1, c1 + c2);          /* 减数不超过当前和 */
+        var mid = c1 + c2;
+        return {
+          kind: max <= 5 ? 'num5' : 'num10', level: lv.id, layout: 'blocks',
+          bkA: mid, bkB: c3, bkOp: '−',
+          prompt: (c1 + ' + ' + c2 + ' − ' + c3 + ' = ？先算加法，再减'),
+          answer: mid - c3,
+          options: mkNumOpts(mid - c3, 3, 1, 0, max),
+          sig: 'ch' + max + c1 + c2 + c3
+        };
+      }
+
+      if (mode === 'zero') {
+        /* 0 的认识与加减：a ± 0 = a，a − a = 0，以及 0 表示没有 */
+        var zt = pick(['plus0', 'minus0', 'self', 'none']);
+        var z = ri(1, Math.max(2, top));
+        if (zt === 'plus0') {
+          return {
+            kind: max <= 5 ? 'num5' : 'num10', level: lv.id, layout: 'blocks',
+            bkA: z, bkB: 0, bkOp: '+',
+            prompt: '算一算：' + z + ' + 0 = ？',
+            answer: z, options: mkNumOpts(z, 3, 1, 0, max),
+            sig: 'z0p' + z
+          };
+        }
+        if (zt === 'none') {
+          /* 盘子里 0 个：认识「0 表示一个也没有」 */
+          return {
+            kind: max <= 5 ? 'num5' : 'num10', level: lv.id, layout: 'blocks',
+            bkA: 0, bkB: 0, bkOp: '+',
+            prompt: '盘子里一个苹果也没有，用哪个数表示？',
+            answer: 0, options: mkNumOpts(0, 3, 1, 0, 5),
+            sig: 'z0n' + Math.random().toString(36).slice(2, 7)
+          };
+        }
+        if (zt === 'minus0') {
+          return {
+            kind: max <= 5 ? 'num5' : 'num10', level: lv.id, layout: 'blocks',
+            bkA: z, bkB: 0, bkOp: '−',
+            prompt: '算一算：' + z + ' − 0 = ？',
+            answer: z, options: mkNumOpts(z, 3, 1, 0, max),
+            sig: 'z0m' + z
+          };
+        }
+        return {
+          kind: max <= 5 ? 'num5' : 'num10', level: lv.id, layout: 'blocks',
+          bkA: z, bkB: z, bkOp: '−',
+          prompt: '算一算：' + z + ' − ' + z + ' = ？',
+          answer: 0, options: mkNumOpts(0, 3, 1, 0, max),
+          sig: 'z0s' + z
+        };
+      }
+
+      if (focus === 'know' && Math.random() < 0.55) {
+        /* 认数课的重点：第几、分与合、比多少 */
+        var kindKnow = max <= 5 ? 'num5' : 'num10';
+        var kt = pick(['ordinal', 'split', 'compareMore']);
+        if (kt === 'ordinal') {
+          var total = ri(3, top);
+          var pos = ri(1, total);
+          return {
+            kind: kindKnow, level: lv.id, layout: 'countdots',
+            cdN: total,
+            prompt: '小动物排队，一共有 ' + total + ' 只，从左数第 ' + pos + ' 只的前面有几只？',
+            answer: pos - 1, options: mkNumOpts(pos - 1, 3, 1, 0, top),
+            sig: 'ko' + total + pos
+          };
+        }
+        if (kt === 'split') {
+          var whole = ri(2, top);
+          var part = ri(1, whole - 1);
+          return {
+            kind: kindKnow, level: lv.id, layout: 'blocks',
+            bkA: whole, bkB: part, bkOp: '−',
+            prompt: whole + ' 可以分成 ' + part + ' 和（ ）',
+            answer: whole - part, options: mkNumOpts(whole - part, 3, 1, 0, top),
+            sig: 'ks' + whole + part
+          };
+        }
+        /* 比多少：甲比乙多几个 */
+        var big = ri(2, top), small = ri(1, big - 1);
+        return {
+          kind: kindKnow, level: lv.id, layout: 'compare2',
+          cmpA: big, cmpB: small,
+          prompt: '苹果 ' + big + ' 个，梨 ' + small + ' 个，苹果比梨多（ ）个',
+          answer: big - small, options: mkNumOpts(big - small, 3, 1, 0, top),
+          sig: 'km' + big + small
+        };
+      }
+
       if (mode === 'count') {
-        var n = ri(1, max);
+        var n = ri(1, top);
         return {
           kind: max <= 5 ? 'num5' : 'num10', level: lv.id, layout: 'countdots',
           cdN: n,
           prompt: '数一数，有几个？',
-          answer: n, options: mkNumOpts(n, 3, 1, 1, max + 1),
+          answer: n, options: mkNumOpts(n, 3, 1, 1, top + 1),
           sig: 'sn' + max + n
         };
       }
       if (mode === 'add') {
-        var a = ri(1, max - 1), b = ri(1, max - a);
+        var a = ri(1, top - 1), b = ri(1, top - a);
         return {
           kind: max <= 5 ? 'num5' : 'num10', level: lv.id, layout: 'blocks',
           bkA: a, bkB: b, bkOp: '+',
           prompt: '算一算，一共有几个？',
-          answer: a + b, options: mkNumOpts(a + b, 3, 1, 0, max + 1),
+          answer: a + b, options: mkNumOpts(a + b, 3, 1, 0, top + 1),
           sig: 'sa' + max + a + b
         };
       }
       if (mode === 'sub') {
-        var c = ri(2, max), d = ri(1, c - 1);
+        var c = ri(2, top), d = ri(1, c - 1);
         return {
           kind: max <= 5 ? 'num5' : 'num10', level: lv.id, layout: 'blocks',
           bkA: c, bkB: d, bkOp: '−',
           prompt: '吃掉 ' + d + ' 个，还剩几个？',
-          answer: c - d, options: mkNumOpts(c - d, 3, 1, 0, max),
+          answer: c - d, options: mkNumOpts(c - d, 3, 1, 0, top),
           sig: 'ss' + max + c + d
         };
       }
-      var x = ri(1, max), y = ri(1, max);
-      while (y === x) y = ri(1, max);
+      var x = ri(1, top), y = ri(1, top);
+      while (y === x) y = ri(1, top);
       return {
         kind: max <= 5 ? 'num5' : 'num10', level: lv.id, layout: 'compare2',
         cmpA: x, cmpB: y,

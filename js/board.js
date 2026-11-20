@@ -1160,7 +1160,10 @@
           onTable: '<div class="ps-stack"><span class="ps-obj hi">🐱</span><span class="ps-ref">🪑</span></div>',
           underTable: '<div class="ps-stack"><span class="ps-ref">🪑</span><span class="ps-obj hi">⚽</span></div>',
           leftOf: '<div class="ps-row"><span class="ps-obj hi">🌳</span><span class="ps-ref">🏠</span></div>',
-          rightOf: '<div class="ps-row"><span class="ps-ref">🏠</span><span class="ps-obj hi">🌸</span></div>'
+          rightOf: '<div class="ps-row"><span class="ps-ref">🏠</span><span class="ps-obj hi">🌸</span></div>',
+          /* 前后用纵深感表达：上面的离得远（后），下面的离得近（前） */
+          frontOf: '<div class="ps-depth"><span class="ps-far">🧑</span><span class="ps-near hi">🐶</span></div>',
+          behindOf: '<div class="ps-depth"><span class="ps-far hi">🐱</span><span class="ps-near">🧑</span></div>'
         }[scene] || '';
         pw.innerHTML = '<div class="pos-scene">' + layoutHTML + '</div>';
         wrap._stage.appendChild(pw);

@@ -41,15 +41,54 @@
   ];
 
   D.LEVELS = [
-    /* ---- 一年级上册（按人教版 8 个单元） ---- */
-    { id: 'lv1', name: '数数岛',   fruit: 'apple',  skill: '数一数',        kinds: ['count'],   max: 10, c1: '#FFD9A0', c2: '#FF9A5C', shadow: '#D96A12', grade: 'g1', term: 'up', unit: '第 1 单元', playType: 'practice' },
-    { id: 'lv2', name: '位置岛',   fruit: 'peach',  skill: '位置',          kinds: ['pos'],     max: 0,  c1: '#FFE4C8', c2: '#FFB067', shadow: '#C96A1E', grade: 'g1', term: 'up', unit: '第 2 单元', playType: 'practice' },
-    { id: 'lv3', name: '5以内岛',  fruit: 'orange', skill: '1~5 的认识和加减法', kinds: ['num5'], max: 5,  c1: '#FFE9A0', c2: '#FFB33F', shadow: '#D98A00', grade: 'g1', term: 'up', unit: '第 3 单元', playType: 'practice' },
-    { id: 'lv4', name: '立体岛',   fruit: 'grape',  skill: '认识图形（一）',  kinds: ['solid3d'], max: 0,  c1: '#E3CCFF', c2: '#B57BF0', shadow: '#7A3FBF', grade: 'g1', term: 'up', unit: '第 4 单元', playType: 'practice' },
-    { id: 'lv5', name: '10以内岛', fruit: 'banana', skill: '6~10 的认识和加减法', kinds: ['num10'], max: 10, c1: '#FFF2A8', c2: '#FFD93D', shadow: '#D9A800', grade: 'g1', term: 'up', unit: '第 5 单元', playType: 'practice' },
-    { id: 'lv6', name: '十几岛',   fruit: 'melon',  skill: '11~20 各数的认识', kinds: ['num20'],  max: 20, c1: '#B8F0A8', c2: '#5BD44B', shadow: '#2F8A24', grade: 'g1', term: 'up', unit: '第 6 单元', playType: 'practice' },
-    { id: 'lv7', name: '时钟岛',   fruit: 'berry',  skill: '认识钟表',       kinds: ['clock1'],  max: 0,  c1: '#FFC8D8', c2: '#FF6B8F', shadow: '#C93E62', grade: 'g1', term: 'up', unit: '第 7 单元', playType: 'practice' },
-    { id: 'lv8', name: '进位岛',   fruit: 'star',   skill: '20 以内的进位加法', kinds: ['carry10'], max: 20, c1: '#C8E8FF', c2: '#6FB8F5', shadow: '#2F7BBF', grade: 'g1', term: 'up', unit: '第 8 单元', playType: 'challenge' },
+    /* ---- 一年级上册（按人教版课时细分，共 15 关） ---- */
+    /* 第 1 单元 准备课：数一数 / 比多少 */
+    { id: 'lv1', name: '数数岛',  fruit: 'apple',  skill: '数一数', kinds: ['count'], max: 10,
+      c1: '#FFD9A0', c2: '#FF9A5C', shadow: '#D96A12', grade: 'g1', term: 'up', unit: '第 1 单元', playType: 'practice' },
+    { id: 'u1_2', name: '比多少岛', fruit: 'peach', skill: '比多少', kinds: ['num10'], focus: 'compare-only', max: 10,
+      c1: '#FFE4C8', c2: '#FFB067', shadow: '#C96A1E', grade: 'g1', term: 'up', unit: '第 1 单元', playType: 'practice' },
+
+    /* 第 2 单元 位置：上下左右 / 前后 */
+    { id: 'lv2', name: '位置岛',  fruit: 'grape',  skill: '上、下、左、右', kinds: ['pos'], max: 0,
+      c1: '#E3CCFF', c2: '#B57BF0', shadow: '#7A3FBF', grade: 'g1', term: 'up', unit: '第 2 单元', playType: 'practice' },
+    { id: 'u2_2', name: '前后岛', fruit: 'melon', skill: '前、后', kinds: ['pos'], focus: 'before-after', max: 0,
+      c1: '#B8F0A8', c2: '#5BD44B', shadow: '#2F8A24', grade: 'g1', term: 'up', unit: '第 2 单元', playType: 'practice' },
+
+    /* 第 3 单元 1~5 的认识和加减法：认识 / 加减 / 0 */
+    { id: 'lv3', name: '5以内岛', fruit: 'orange', skill: '1~5 的认识', kinds: ['num5'], focus: 'know', max: 5,
+      c1: '#FFE9A0', c2: '#FFB33F', shadow: '#D98A00', grade: 'g1', term: 'up', unit: '第 3 单元', playType: 'practice' },
+    { id: 'u3_2', name: '5以内加减岛', fruit: 'apple', skill: '1~5 的加减法', kinds: ['num5'], focus: 'addsub', max: 5,
+      c1: '#FFD9A0', c2: '#FF9A5C', shadow: '#D96A12', grade: 'g1', term: 'up', unit: '第 3 单元', playType: 'practice' },
+    { id: 'u3_3', name: '0的岛', fruit: 'berry', skill: '0 的认识和加减', kinds: ['num5'], focus: 'zero', max: 5,
+      c1: '#FFC8D8', c2: '#FF6B8F', shadow: '#C93E62', grade: 'g1', term: 'up', unit: '第 3 单元', playType: 'practice' },
+
+    /* 第 4 单元 认识图形（一）：立体图形 */
+    { id: 'lv4', name: '立体岛', fruit: 'star', skill: '认识图形（一）', kinds: ['solid3d'], max: 0,
+      c1: '#C8E8FF', c2: '#6FB8F5', shadow: '#2F7BBF', grade: 'g1', term: 'up', unit: '第 4 单元', playType: 'practice' },
+
+    /* 第 5 单元 6~10 的认识和加减法：6、7 / 8、9 / 10 / 连加连减 */
+    { id: 'lv5', name: '6和7岛', fruit: 'banana', skill: '6、7 的认识和加减', kinds: ['num10'], focus: 'know', max: 10, top: 7,
+      c1: '#FFF2A8', c2: '#FFD93D', shadow: '#D9A800', grade: 'g1', term: 'up', unit: '第 5 单元', playType: 'practice' },
+    { id: 'u5_2', name: '8和9岛', fruit: 'apple', skill: '8、9 的认识和加减', kinds: ['num10'], focus: 'addsub', max: 10, top: 9,
+      c1: '#FFD9A0', c2: '#FF9A5C', shadow: '#D96A12', grade: 'g1', term: 'up', unit: '第 5 单元', playType: 'practice' },
+    { id: 'u5_3', name: '连加连减岛', fruit: 'peach', skill: '连加、连减、加减混合', kinds: ['num10'], focus: 'chain', max: 10,
+      c1: '#FFE4C8', c2: '#FFB067', shadow: '#C96A1E', grade: 'g1', term: 'up', unit: '第 5 单元', playType: 'practice' },
+
+    /* 第 6 单元 11~20 各数的认识 */
+    { id: 'lv6', name: '十几岛', fruit: 'melon', skill: '11~20 各数的认识', kinds: ['num20'], max: 20,
+      c1: '#B8F0A8', c2: '#5BD44B', shadow: '#2F8A24', grade: 'g1', term: 'up', unit: '第 6 单元', playType: 'practice' },
+
+    /* 第 7 单元 认识钟表 */
+    { id: 'lv7', name: '时钟岛', fruit: 'berry', skill: '认识钟表', kinds: ['clock1'], max: 0,
+      c1: '#FFC8D8', c2: '#FF6B8F', shadow: '#C93E62', grade: 'g1', term: 'up', unit: '第 7 单元', playType: 'practice' },
+
+    /* 第 8 单元 20 以内的进位加法：9 加几 / 8、7、6 加几 / 综合 */
+    { id: 'lv8', name: '9加几岛', fruit: 'star', skill: '9 加几', kinds: ['carry10'], focus: 'nine', max: 20,
+      c1: '#C8E8FF', c2: '#6FB8F5', shadow: '#2F7BBF', grade: 'g1', term: 'up', unit: '第 8 单元', playType: 'practice' },
+    { id: 'u8_2', name: '876加几岛', fruit: 'grape', skill: '8、7、6 加几', kinds: ['carry10'], focus: 'eight-seven-six', max: 20,
+      c1: '#E3CCFF', c2: '#B57BF0', shadow: '#7A3FBF', grade: 'g1', term: 'up', unit: '第 8 单元', playType: 'practice' },
+    { id: 'u8_3', name: '进位复习岛', fruit: 'orange', skill: '20 以内进位加法（综合）', kinds: ['carry10'], max: 20,
+      c1: '#FFE9A0', c2: '#FFB33F', shadow: '#D98A00', grade: 'g1', term: 'up', unit: '第 8 单元', playType: 'challenge' },
 
     /* ---- 三年级上册 ---- */
     { id: 'g1', name: '时钟岛',   fruit: 'apple',  skill: '时、分、秒',        kinds: ['time'],        max: 0, c1: '#FFE0B2', c2: '#FFA65C', shadow: '#D2691E', grade: 'g3', term: 'up', book: '三上', unit: '第 1 单元', playType: 'practice' },
@@ -72,14 +111,44 @@
     { id: 'g16', name: '小数点岛', fruit: 'berry',  skill: '小数的初步认识',   kinds: ['decimal'],     max: 0, c1: '#FFD4E0', c2: '#FF7FA0', shadow: '#C9405F', grade: 'g3', term: 'down', book: '三下', unit: '第 7 单元', playType: 'challenge' },
     { id: 'g17', name: '搭配岛',   fruit: 'star',   skill: '数学广角·搭配',    kinds: ['combo'],       max: 0, c1: '#CFE8FF', c2: '#6FB8F5', shadow: '#2F7BBF', grade: 'g3', term: 'down', book: '三下', unit: '第 8 单元', playType: 'story' },
 
-    /* ================= 一年级下册 ================= */
-    { id: 'a1_1', name: '拼图岛', fruit: 'apple', skill: '认识图形（二）', kinds: ['shape2'], grade: 'g1', term: 'down', unit: '第 1 单元', c1: '#FFD9A0', c2: '#FF9A5C', shadow: '#D96A12', playType: 'practice' },
-    { id: 'a1_2', name: '退位岛', fruit: 'orange', skill: '20 以内退位减法', kinds: ['sub20'], grade: 'g1', term: 'down', unit: '第 2 单元', c1: '#FFE9A0', c2: '#FFB33F', shadow: '#D98A00', playType: 'practice' },
-    { id: 'a1_3', name: '分类岛', fruit: 'grape', skill: '分类与整理', kinds: ['classify'], grade: 'g1', term: 'down', unit: '第 3 单元', c1: '#E3CCFF', c2: '#B57BF0', shadow: '#7A3FBF', playType: 'practice' },
-    { id: 'a1_4', name: '百数岛', fruit: 'banana', skill: '100 以内数的认识', kinds: ['num100'], grade: 'g1', term: 'down', unit: '第 4 单元', c1: '#FFF2A8', c2: '#FFD93D', shadow: '#D9A800', playType: 'practice' },
-    { id: 'a1_5', name: '钱币岛', fruit: 'melon', skill: '认识人民币', kinds: ['money'], grade: 'g1', term: 'down', unit: '第 5 单元', c1: '#B8F0A8', c2: '#5BD44B', shadow: '#2F8A24', playType: 'practice' },
-    { id: 'a1_6', name: '整十岛', fruit: 'peach', skill: '100 以内加减（一）', kinds: ['add100'], grade: 'g1', term: 'down', unit: '第 6 单元', c1: '#FFD6DE', c2: '#FF8FB8', shadow: '#D9507F', playType: 'practice' },
-    { id: 'a1_7', name: '找规律岛', fruit: 'berry', skill: '找规律', kinds: ['pattern'], grade: 'g1', term: 'down', unit: '第 7 单元', c1: '#FFC8D8', c2: '#FF6B8F', shadow: '#C93E62', playType: 'practice' },
+    /* ================= 一年级下册（按课时细分，共 12 关） ================= */
+    /* 第 1 单元 认识图形（二）：平面图形 */
+    { id: 'a1_1', name: '拼图岛', fruit: 'apple', skill: '认识图形（二）', kinds: ['shape2'],
+      grade: 'g1', term: 'down', unit: '第 1 单元', c1: '#FFD9A0', c2: '#FF9A5C', shadow: '#D96A12', playType: 'practice' },
+
+    /* 第 2 单元 20 以内的退位减法：十几减 9 / 十几减 8、7 / 综合 */
+    { id: 'a1_2', name: '退位岛', fruit: 'orange', skill: '十几减 9', kinds: ['sub20'], focus: 'minus9',
+      grade: 'g1', term: 'down', unit: '第 2 单元', c1: '#FFE9A0', c2: '#FFB33F', shadow: '#D98A00', playType: 'practice' },
+    { id: 'a1_2b', name: '退位二岛', fruit: 'apple', skill: '十几减 8、7', kinds: ['sub20'], focus: 'minus8-7',
+      grade: 'g1', term: 'down', unit: '第 2 单元', c1: '#FFD9A0', c2: '#FF9A5C', shadow: '#D96A12', playType: 'practice' },
+    { id: 'a1_2c', name: '退位综合岛', fruit: 'berry', skill: '20 以内退位减法（综合）', kinds: ['sub20'],
+      grade: 'g1', term: 'down', unit: '第 2 单元', c1: '#FFC8D8', c2: '#FF6B8F', shadow: '#C93E62', playType: 'challenge' },
+
+    /* 第 3 单元 分类与整理 */
+    { id: 'a1_3', name: '分类岛', fruit: 'grape', skill: '分类与整理', kinds: ['classify'],
+      grade: 'g1', term: 'down', unit: '第 3 单元', c1: '#E3CCFF', c2: '#B57BF0', shadow: '#7A3FBF', playType: 'practice' },
+
+    /* 第 4 单元 100 以内数的认识：数数与组成 / 比大小 / 整十数 */
+    { id: 'a1_4', name: '百数岛', fruit: 'banana', skill: '100 以内数的认识', kinds: ['num100'], focus: 'count-only',
+      grade: 'g1', term: 'down', unit: '第 4 单元', c1: '#FFF2A8', c2: '#FFD93D', shadow: '#D9A800', playType: 'practice' },
+    { id: 'a1_4b', name: '整十岛', fruit: 'peach', skill: '整十数与数的顺序', kinds: ['num100'], focus: 'tens-only',
+      grade: 'g1', term: 'down', unit: '第 4 单元', c1: '#FFE4C8', c2: '#FFB067', shadow: '#C96A1E', playType: 'practice' },
+
+    /* 第 5 单元 认识人民币 */
+    { id: 'a1_5', name: '钱币岛', fruit: 'melon', skill: '认识人民币', kinds: ['money'],
+      grade: 'g1', term: 'down', unit: '第 5 单元', c1: '#B8F0A8', c2: '#5BD44B', shadow: '#2F8A24', playType: 'practice' },
+
+    /* 第 6 单元 100 以内的加法和减法（一）：整十数 / 两位加减一位 / 综合 */
+    { id: 'a1_6', name: '整十加减岛', fruit: 'peach', skill: '整十数加减', kinds: ['add100'], focus: 'tens',
+      grade: 'g1', term: 'down', unit: '第 6 单元', c1: '#FFD6DE', c2: '#FF8FB8', shadow: '#D9507F', playType: 'practice' },
+    { id: 'a1_6b', name: '两位数岛', fruit: 'orange', skill: '100 以内加减（一）', kinds: ['add100'],
+      grade: 'g1', term: 'down', unit: '第 6 单元', c1: '#FFE9A0', c2: '#FFB33F', shadow: '#D98A00', playType: 'practice' },
+    { id: 'a1_6c', name: '连减岛', fruit: 'star', skill: '100 以内连加连减', kinds: ['add100'],
+      grade: 'g1', term: 'down', unit: '第 6 单元', c1: '#C8E8FF', c2: '#6FB8F5', shadow: '#2F7BBF', playType: 'challenge' },
+
+    /* 第 7 单元 找规律 */
+    { id: 'a1_7', name: '找规律岛', fruit: 'berry', skill: '找规律', kinds: ['pattern'],
+      grade: 'g1', term: 'down', unit: '第 7 单元', c1: '#FFC8D8', c2: '#FF6B8F', shadow: '#C93E62', playType: 'practice' },
 
     /* ================= 二年级上册 ================= */
     { id: 'a2_1', name: '厘米岛', fruit: 'apple', skill: '长度单位', kinds: ['length'], grade: 'g2', term: 'up', unit: '第 1 单元', c1: '#D0F0FF', c2: '#5FC3F0', shadow: '#1E7FA8', playType: 'practice' },
